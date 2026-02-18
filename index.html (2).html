@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aventurita con mi esposa 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#1a1b2f,#302b63,#24243e);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+}
+
+.container{
+    width:95%;
+    max-width:600px;
+    padding:35px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 40px rgba(255,105,180,0.3);
+    text-align:center;
+    animation:fade 1s ease;
+}
+
+h1{
+    font-size:1.7rem;
+    margin-bottom:15px;
+}
+
+#pregunta{
+    font-size:1.1rem;
+    margin-bottom:20px;
+}
+
+button{
+    display:block;
+    width:100%;
+    margin:10px 0;
+    padding:12px;
+    border:none;
+    border-radius:20px;
+    background:#ff6fa5;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    background:#ff4f8b;
+}
+
+/* Barra progreso */
+.progress-bar{
+    height:10px;
+    background:rgba(255,255,255,0.1);
+    border-radius:10px;
+    margin:15px 0;
+    overflow:hidden;
+}
+
+.progress{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#ff6fa5,#ff9ecb);
+    transition:0.4s;
+}
+
+/* Barra amor */
+.amor-bar{
+    height:10px;
+    background:rgba(255,255,255,0.1);
+    border-radius:10px;
+    margin:10px 0;
+    overflow:hidden;
+}
+
+.amor{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#ff1493,#ff69b4);
+    transition:0.4s;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:scale(0.9);}
+    to{opacity:1; transform:scale(1);}
+}
+
+/* Partículas */
+.particle{
+    position:fixed;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    opacity:0.7;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+</style>
+</head>
+<body>
+
+<!-- Música (opcional) -->
+<audio id="musica" loop>
+    <source src="AQUI_TU_CANCION.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+    <h1>🎮 La Aventura con mi esposa 💗</h1>
+
+    <div class="progress-bar">
+        <div class="progress" id="barraProgreso"></div>
+    </div>
+
+    <div class="amor-bar">
+        <div class="amor" id="barraAmor"></div>
+    </div>
+
+    <p id="pregunta"></p>
+
+    <div id="opciones"></div>
+
+</div>
+
+<script>
+
+/* ============================= */
+/* ✏️ AQUI EDITAS TUS PREGUNTAS */
+/* ============================= */
+
+const preguntas = [
+
+/* EJEMPLO — BORRA ESTO Y PON TUS 17 */
+{
+    texto: "Cuanto tiempo llevamos juntos?",
+    opciones: [
+        {respuesta: "3 meses", puntos: 10},
+        {respuesta: "3 semanas", puntos: 0}
+    ]
+},
+
+{
+    texto: "Cual fue el primer juego que jugamos juntos?",
+    opciones: [
+        {respuesta: "Minecraft", puntos: 0},
+        {respuesta: "Roblox (evade)", puntos: 10}
+    ]
+},
+{
+    texto: "Que cocinaron tu y tu esposo el 14 de febrero?",
+    opciones: [
+        {respuesta: "Pasta", puntos: 10},
+        {respuesta: "Sopa no quemada", puntos: 0}
+    ]
+},
+{
+    texto: "Como le quedo la pasta a tu esposo?",
+    opciones: [
+        {respuesta: "Mala, horrible, asquerosa, fea, ni pasta era", puntos: 10},
+        {respuesta: "pelfecta", puntos: 0}
+    ]
+},
+{
+    texto: "Que apodo le gusta usar a tu esposo contigo?",
+    opciones: [
+        {respuesta: "Cielo", puntos: 10},
+        {respuesta: "Mi amor", puntos: 10}
+    ]
+},
+{
+    texto: "Que hacen tu y tu esposo en rave?",
+    opciones: [
+        {respuesta: "Ver peliculillass", puntos: 10},
+        {respuesta: "Jugal", puntos: 0}
+    ]
+},
+{
+    texto: "Juego que mas has jugado con tu esposo?",
+    opciones: [
+        {respuesta: "Evadil", puntos: 10},
+        {respuesta: "league of legends", puntos: 0}
+    ]
+},
+{
+    texto: "Quien juega mejor?",
+    opciones: [
+        {respuesta: "Diana", puntos: 15},
+        {respuesta: "Monserrat", puntos: 15}
+    ]
+},
+{
+    texto: "Juego favorito de tu esposo?",
+    opciones: [
+        {respuesta: "Outcome Memories", puntos: 0},
+        {respuesta: "SSF2", puntos: 10}
+    ]
+},
+{
+    texto: "Que le gusta mas a tu esposo de tu carita?",
+    opciones: [
+        {respuesta: "Tus ojos", puntos: 10},
+        {respuesta: "Tu sonrisa", puntos: 10},
+                {respuesta: "Tu nariz", puntos: 15},
+    ]
+},
+{
+    texto: "Quien se enamoro primero?",
+    opciones: [
+        {respuesta: "Yo merita", puntos: 10},
+        {respuesta: "Mi esposo", puntos: 0}
+    ]
+},
+{
+    texto: "Por donde hablaron primero?",
+    opciones: [
+        {respuesta: "Whatsapp", puntos: 0},
+        {respuesta: "Discord", puntos: 15}
+    ]
+},
+{
+    texto: "Que regalo nunca llego a su destino?",
+    opciones: [
+        {respuesta: "Una carta", puntos: 0},
+        {respuesta: "un peluche", puntos: 10}
+    ]
+},
+{
+    texto: "Que serie tu esposo te recomendo y viste por el?",
+    opciones: [
+        {respuesta: "One piece", puntos: 0},
+        {respuesta: "Vinland Saga", puntos: 10}
+    ]
+},
+{
+    texto: "Cuales eran las iniciales del clan de dc donde se conocieron?",
+    opciones: [
+        {respuesta: "GS", puntos: 0},
+        {respuesta: "SCR", puntos: 10}
+    ]
+},
+{
+    texto: "Quien es mas celoso?",
+    opciones: [
+        {respuesta: "Yio", puntos: 10},
+        {respuesta: "Flan", puntos: 10}
+    ]
+},
+{
+    texto: "Cuanto duraran juntos?",
+    opciones: [
+        {respuesta: "Eternamente", puntos: 10},
+        {respuesta: "Hasta que la muerte nos separe", puntos: 0}
+    ]
+},
+
+
+
+/* DUPLICA HASTA TENER 17 */
+];
+
+
+/* ============================= */
+/* ⚙️ LOGICA DEL JUEGO */
+/* ============================= */
+
+let actual = 0;
+let amor = 0;
+
+function mostrarPregunta(){
+    const pregunta = preguntas[actual];
+    document.getElementById("pregunta").innerText = pregunta.texto;
+
+    const opcionesDiv = document.getElementById("opciones");
+    opcionesDiv.innerHTML = "";
+
+    pregunta.opciones.forEach(op => {
+        const btn = document.createElement("button");
+        btn.innerText = op.respuesta;
+        btn.onclick = () => siguiente(op.puntos);
+        opcionesDiv.appendChild(btn);
+    });
+
+    actualizarBarras();
+}
+
+function siguiente(puntos){
+    amor += puntos;
+    actual++;
+
+    if(actual < preguntas.length){
+        mostrarPregunta();
+    } else {
+        finalJuego();
+    }
+}
+
+function actualizarBarras(){
+    let progreso = (actual / preguntas.length) * 100;
+    document.getElementById("barraProgreso").style.width = progreso + "%";
+
+    let amorMax = preguntas.length * 10;
+    let amorPorcentaje = (amor / amorMax) * 100;
+    document.getElementById("barraAmor").style.width = amorPorcentaje + "%";
+}
+
+function finalJuego(){
+    document.getElementById("pregunta").innerHTML = `
+
+    <!-- 💌 AQUI ESCRIBES TU MENSAJE FINAL PERSONALIZADO 💌 -->
+
+    Mi amor, Diana, esto es una pequeña demostracion de todo el amor que siento por ti, de hecho una de las inspiraciones para comenzar con esto de la programacion fuiste tu, cielo, no tenia idea de que iba a estudiar o que seria de mi vida hasta que llegaste tu, has sido como un punto de comienzo en mi vida, he mejorado desde que estas tu, mejores calificaciones, una meta clara y consisa, por dios ya hasta tengo universidad elegida, algo que hace años nunca pense tener, insconsientemente y de alguna forma haces que sea una mejor persona cada dia, amor, eres la luz de mi vida, como una luna que ilumina una fria y oscura noche, tu la conviertes en algo totalmente diferente con la luz que irradias, asi iluminaste mi vida, la hiciste una noche estrellada, cielo. Gracias por aparecer en mi vida y compartir tu vida conmigo para siempre, hare todo lo que pueda y mas para recompensarte esa decision que tomaste. Te ame ayer, hoy y te amare muchisisisimo mas mañana. De nuevo gracias, mi amor, por todo lo bueno que le has hecho a mi vida, te amo con toda mi alma y ser 💗
+
+    `;
+
+    document.getElementById("opciones").innerHTML =
+    `<button onclick="location.reload()">Volver a jugar 🔄</button>`;
+}
+
+/* Partículas aesthetic */
+for(let i=0;i<80;i++){
+    let p=document.createElement("div");
+    p.classList.add("particle");
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(Math.random()*5+3)+"s";
+    document.body.appendChild(p);
+}
+
+/* Iniciar */
+mostrarPregunta();
+
+</script>
+
+</body>
+</html>
